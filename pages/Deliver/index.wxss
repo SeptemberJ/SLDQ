@@ -1,0 +1,115 @@
+page{
+   background-color: #F4F4F4; 
+}
+.orderTab_wrap{
+  width: 100%;
+  height: 42px;
+  background-color: #fff;
+}
+.orderTab{
+  width: 98%;
+  height: 42px;
+  margin: 0rpx auto;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.tabItem{ 
+  height: 100%;
+  flex-grow: 1;
+  text-align: center;
+  color: #666;
+  padding: 0rpx;
+  font-size: 32rpx;
+  font-weight: bold;
+  line-height: 42px;
+}
+.active{ 
+  color: #3b5d9d;
+  border-bottom:2px solid #3b5d9d;
+}
+.orderList_wrap{
+  width: 100%;
+  margin: 0rpx auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.orderItem{
+  width: 700rpx;
+  margin: 40rpx auto;
+  background: #fff;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  border-top-right-radius: 10rpx;
+  border-bottom-right-radius: 10rpx;
+}
+.Green{
+  border-left: 4px solid #39c85c;
+}
+.Yellow{
+  border-left: 4px solid #feaf00;
+}
+.Purple{
+  border-left: 4px solid #995A75;
+}
+.Red{
+  border-left: 4px solid #d81e06;
+}
+.BtGreen{
+  background-color: #39c85c !important;
+}
+.BtYellow{
+  background-color: #feaf00 !important;
+}
+.BtPurple{
+  background-color: #995A75 !important;
+}
+.BtRed{
+  background-color: #d81e06 !important;
+}
+
+.order_left{
+  width: 500rpx;
+   height: calc(100% -30rpx); 
+  padding: 20rpx 15rpx;
+  flex-direction: column;
+}
+.order_left .textBlock{
+  width: 100%;
+  margin-top: 10rpx;
+  display: block;
+  font-size: 32rpx;
+  color: #666;
+}
+.order_right{
+  width: 200rpx;
+  height: 100%;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+/*.strap{
+	height: 1rpx;
+	margin-top: 40rpx;
+	border-bottom: 30rpx solid red;
+	border-image: url(/images/锯齿.jpg) 30 30 round;
+}*/
+/*public*/
+.InfoNull{
+    width: 100%;
+	display: flex;
+    flex-direction: column;
+	align-items: center;
+    margin: 20rpx auto;
+    text-align: center;
+}
+.InfoNull image{
+    width: 200rpx;
+	height: 200rpx;
+    margin: 80rpx auto;
+    
+}

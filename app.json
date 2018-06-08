@@ -1,0 +1,19 @@
+{
+  "pages": [
+    "pages/Login/index",
+    "pages/Deliver/index",
+    
+    "pages/OrderList/index",
+    "pages/Submit/index",
+    "pages/Sign/index"
+  ],
+  "window": {
+    "backgroundTextStyle": "white",
+    "navigationBarTextStyle": "white",
+    "navigationBarTitleText": "三联电器",
+    "navigationBarBackgroundColor": "#3b5d9d",
+    "backgroundColor": "#7FC9B8",
+    "enablePullDownRefresh": true
+  },
+  "debug": true
+}

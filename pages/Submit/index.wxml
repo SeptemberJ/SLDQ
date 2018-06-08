@@ -1,0 +1,26 @@
+<view  class="submitBox">
+  <view class='tit titWrap'>
+    <text >机器二维码</text>
+    <image class='Qcode' src='../../images/barcode-scan.png' bindtap='GetQCode'></image>
+  </view>
+  <input placeholder="请输入或扫码填入机器二维码" value='{{QCode}}' bindinput='ChangeQCode'></input>
+  <text class='tit'>服务图片</text>
+  <!--图片  -->
+  <view class='imgList'>
+    <image class='imgWrap' wx:for="{{tempFilePaths}}" wx:for-item="ImgItem" wx:for-index="ImgIdx" src="{{ImgItem}}">
+      <image class='imgItem'  src="../../images/delete.png" data-idx="{{ImgIdx}}" bindtap='DeleteImg'></image>
+    </image>
+    <image class='ImgBlock' src="../../images/add.png" bindtap='ChooseImage'></image>
+  </view>
+    
+    <!--服务反馈  -->
+    <text class='tit'>服务反馈</text>
+    <textarea bindinput='ChangeNote' maxlength="-1" placeholder="请输入服务反馈" value='{{Note}}' />
+    <button bindtap="SumitInfo"  class="apply-add MarginTB_20" hover-class="hoverClass" disabled="{{Canwork}}">提交</button>
+</view>
+
+
+
+<loading hidden="{{loadingHidden}}">
+  加载中...
+</loading>

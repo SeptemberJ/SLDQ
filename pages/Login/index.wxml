@@ -1,0 +1,36 @@
+<view  class="loginBox">
+     <text class="loginT"></text> 
+    <view class="item">
+        <view class="icon">
+        <image src="../../images/icon/user.png" />
+        </view>
+        <view class="userBox">
+	    <input value="{{userName}}" placeholder="用户名" bindinput="ChangeUserName" bindfocus="changeBorderColorUser" class="{{changeUserName? 'changeBorderColor':'normalColor'}}" bindblur="noamrlBorderColorUser"/>
+        </view>
+    </view>
+    <view class="item">
+        <view class="icon">
+        <image src="../../images/icon/password.png" />
+        </view>
+        <view class="psdBox">
+	    <input value="{{psd}}" password="true" placeholder="请输入密码" bindinput="ChangePsd" bindfocus="changeBorderPsd" class="{{changePsd? 'changeBorderColor':'normalColor'}}" bindblur="noamrlBorderColorPsd"/>
+        </view>
+    </view>
+     <view class='OperationBar'>
+      <checkbox-group bindchange="RememberPsd">
+        <label class="checkbox">
+          <checkbox  checked="{{ifRemember}}"/>记住密码
+        </label>
+      </checkbox-group>
+      <!-- <view class="forgotPsd">
+          <text bindtap="toSign">去注册</text>
+      </view> -->
+    </view> 
+    <button bindtap="loginIn"  class="apply-add" hover-class="hoverClass">登录</button>
+</view>
+
+<button open-type="getUserInfo">授权</button>
+
+<!-- <loading hidden="{{loadingHidden}}">
+  加载中...
+</loading> -->

@@ -1,0 +1,124 @@
+.loginBox{
+    width: 80%;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10rpx 20rpx;
+}
+.loginT{
+    width: 100%;
+    height: 100rpx;
+    margin-top:30rpx;
+    font-size: 60rpx;
+    line-height: 72rpx;
+    font-weight: bold;
+    color: #609ddc;
+    text-align: center;
+}
+.item{
+    width: 100%;
+    height: 200rpx;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    overflow: hidden; 
+}
+.item .icon{
+    width: 10%;
+} 
+.item .userBox ,.item .psdBox ,.item .roleBox{
+    width: 85%;
+} 
+.OperationBar{
+    width: 100%;
+    height: 100rpx;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    overflow: hidden; 
+}
+checkbox-group{
+  font-size: 32rpx;
+  color: #999;
+}
+
+
+
+
+.radio{
+  margin-left: 20rpx;
+}
+.item image{
+    width: 60rpx;
+    height: 60rpx;
+}
+
+.item input{
+    /*width: calc(100%-60rpx);*/
+    width: 100%;
+    margin: auto 5%;
+    padding: 5rpx 10rpx;
+}
+.normalColor{
+    border-bottom: 4rpx solid #999;
+}
+.changeBorderColor{
+    border-bottom: 4rpx solid #3b5d9d;
+}
+
+.apply-add {
+    width: 150rpx;
+    height: 150rpx;
+    line-height: 150rpx;
+    border-radius: 50%;
+    background: #3b5d9d;
+    font-size: 32rpx;
+    font-weight: bold;
+    /* width:80%;
+    background: #2F3C4D;
+    color: #fff;
+    font-weight: bold; */
+    margin-top: 20px;
+}
+.hoverClass{
+    background: #00FFFF
+}
+.forgotPsd{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+    /* margin-top: -40rpx; */
+    color: #999;
+    font-size: 32rpx;
+}
+.forgotPsd text{
+    /*width: 100%;*/
+    text-align: right;
+    padding-right: 40rpx;
+    
+}
+
+/*  */
+checkbox{
+  width: 30rpx;
+  height: 30rpx;
+  line-height: 30rpx;
+  overflow: hidden;
+   margin-right: 10rpx; 
+} 
+ checkbox .wx-checkbox-input.wx-checkbox-input-checked::before{
+   width: 30rpx;/* 选中后对勾大小 */
+   height: 30rpx;/* 选中后对勾大小 */
+   /* line-height: 30rpx; */
+   text-align: left;
+   font-size:30rpx; /* 对勾大小 30rpx */
+   color: #3b5d9d;
+   
+   /* transform:scale(1);
+   -webkit-transform:scale(1);  */
+    transform:translate(-80%, -80%) scale(1);
+   -webkit-transform:translate(-80%, -80%) scale(1);  
+} 

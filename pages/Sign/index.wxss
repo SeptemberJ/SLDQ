@@ -1,0 +1,82 @@
+.loginBox{
+    width: 80%;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10rpx 20rpx;
+}
+.loginT{
+    width: 100%;
+    height: 100rpx;
+    margin-top:30rpx;
+    font-size: 60rpx;
+    line-height: 72rpx;
+    font-weight: bold;
+    color: #609ddc;
+    text-align: center;
+}
+.item{
+    width: 100%;
+    height: 150rpx;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    overflow: hidden;
+  
+   
+}
+.item .icon{
+    width: 10%;
+} 
+.item .userBox ,.item .psdBox ,.item .roleBox{
+    width: 85%;
+} 
+
+.radio{
+  margin-left: 20rpx;
+}
+.item image{
+    width: 60rpx;
+    height: 60rpx;
+}
+
+.item input{
+    /*width: calc(100%-60rpx);*/
+    width: 100%;
+    margin: auto 5%;
+    padding: 5rpx 10rpx;
+}
+.normalColor{
+    border-bottom: 4rpx solid #2F3C4D;
+}
+.changeBorderColor{
+    border-bottom: 4rpx solid #7FC9B8;
+}
+
+.apply-add {
+    width:80%;
+    background: #2F3C4D;
+    color: #fff;
+    font-weight: bold;
+    margin-top: 20rpx;
+}
+.hoverClass{
+    background: #00FFFF
+}
+.forgotPsd{
+    height: 100rpx;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+    margin-top: -40rpx;
+    color: #999;
+    font-size: 32rpx;
+}
+.forgotPsd text{
+    /*width: 100%;*/
+    text-align: right;
+    padding-right: 40rpx;
+    
+}

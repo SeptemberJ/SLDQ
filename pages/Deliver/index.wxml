@@ -1,0 +1,56 @@
+<view class='orderList_wrap' wx:if="{{OrderList.length>0}}">
+  <view class="orderItem)}}" wx:for="{{OrderList}}" wx:for-item="OrderItem" wx:for-index="OrderIdx">
+  <view class='order_left' bindtap='Detail' data-id='{{OrderItem.id}}'>
+    <view class='textBlock'>
+     <text class='Bold'>单号：</text>
+     <text>{{OrderItem.forderno}}</text>
+    </view>
+    <view class='textBlock'>
+     <text class='Bold'>地址：</text>
+     <text>{{OrderItem.faddress}}</text>
+    </view>
+    <view class='textBlock'>
+     <text class='Bold'>联系人：</text>
+     <text>{{OrderItem.fpeople}}</text>
+    </view>
+    <view class='textBlock'>
+     <text class='Bold'>联系电话：</text>
+     <text>{{OrderItem.ftel}}</text>
+    </view>
+    <view class='textBlock'>
+     <text class='Bold'>特别提醒：</text>
+     <text>{{OrderItem.special_note?OrderItem.special_note:'--'}}</text>
+    </view>
+  </view>
+  <view class='order_right'>
+    <button type="default" class='button' style='background:#3b5d9d' data-id='{{OrderItem.id}}' data-idx='{{OrderIdx}}'  bindtap='DeliverOver'> 确认 </button>
+    </view>
+  </view>
+</view>
+<!--订单详情  -->
+<view class='Mask' wx:if="{{ifShowModal}}">
+</view>
+<view class='Modal' wx:if="{{ifShowModal}}">
+    <text class='Modal_tit'>详细信息</text>
+    <text class='Modal_text'>地址:{{OrderDetail.faddress}}</text>
+    <!-- <text class='Modal_text'>金额：{{OrderDetail.fmoney}}</text> -->
+    <view class='Modal_text'>
+     <!-- <picker wx:if="{{OrderDetail.fbstatus == '3' || OrderDetail.fbstatus == '5' || OrderDetail.fbstatus == '6' || OrderDetail.fbstatus == '7'}}"  mode="date" value="{{modifyDate}}" bindchange="bindDateChange">
+      <view class="picker">
+        要求上门日期: {{modifyDate}}
+      </view>
+    </picker> -->
+     <text>要求上门日期: {{OrderDetail.fgodate}} </text>
+    </view>
+    <text class='Modal_text'>任务:{{OrderDetail.fcontent?OrderDetail.fcontent:''}}</text>
+    <text class='Modal_text'>业务员:{{OrderDetail.fshifu?OrderDetail.fshifu:''}}</text>
+    <view class='operationBlock'>
+      <view class='operation_item lightGreen' bindtap='DetailClose'>关闭</view>
+       <view wx:if="{{OrderDetail.fbstatus == '3' || OrderDetail.fbstatus == '5' || OrderDetail.fbstatus == '6' || OrderDetail.fbstatus == '7'}}" class='operation_item borderL lightGreen'  bindtap='ChangeModifyDate'>保存修改</view> 
+    </view>
+  </view> 
+<!--无订单  -->
+<view class="InfoNull" wx:if="{{OrderList.length<=0}}">
+    <image src="../../images/box-empty.png" />
+    <text>您还没有相关的订单！</text>
+</view>
