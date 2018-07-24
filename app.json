@@ -1,11 +1,11 @@
 {
   "pages": [
     "pages/Login/index",
+    "pages/Search/index",
     "pages/Deliver/index",
-    
     "pages/OrderList/index",
-    "pages/Submit/index",
-    "pages/Sign/index"
+    "pages/Submit/index"
+    
   ],
   "window": {
     "backgroundTextStyle": "white",
@@ -14,6 +14,26 @@
     "navigationBarBackgroundColor": "#3b5d9d",
     "backgroundColor": "#efefef",
     "enablePullDownRefresh": true
+  },
+  "tabBar": {
+    "color": "#000",
+    "selectedColor": "#3b5d9d",
+    "borderStyle": "#efefef",
+    "backgroundColor": "#fff",
+    "list": [
+      {
+        "pagePath": "pages/OrderList/index",
+        "iconPath": "images/icon/order.png",
+        "selectedIconPath": "images/icon/order_active.png",
+        "text": "订单"
+      },
+      {
+        "pagePath": "pages/Search/index",
+        "iconPath": "images/icon/search.png",
+        "selectedIconPath": "images/icon/search_active.png",
+        "text": "查询"
+      }
+    ]
   },
   "debug": true
 }

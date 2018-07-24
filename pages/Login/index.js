@@ -180,15 +180,18 @@ Page({
                 }
               })
             }
-            if (res.data.ftype == 1){
-              wx.navigateTo({
-                url: '../OrderList/index'
-              })
-            }else{
-              wx.navigateTo({
-                url: '../Deliver/index'
-              })
-            }
+            wx.switchTab({
+              url: '../OrderList/index',
+            })
+            // if (res.data.ftype == 1){
+            //   wx.navigateTo({
+            //     url: '../OrderList/index'
+            //   })
+            // }else{
+            //   wx.navigateTo({
+            //     url: '../Deliver/index'
+            //   })
+            // }
             wx.hideLoading()
             break
           case 2:

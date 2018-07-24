@@ -8,11 +8,14 @@ Page({
         //loadingHidden:false,
         Tabs: ['待接单', '待预约', '上门服务', '服务完成'],
         TabCur: 0,
+        userRole: null,
         OrderList:[],
         index:0,
         OrderDetail:'',
         modifyDate:'',
-        ifShowModal:false
+        ifShowModal:false,
+        // OrderList: [],
+        // ifShowModal: false
         
     },
     onLoad: function (options) {
@@ -20,23 +23,28 @@ Page({
     },
     onShow:function(){
       this.setData({
-        TabCur:app.globalData.TabCur
+        TabCur: app.globalData.TabCur,
+        userRole: app.globalData.userRole
       })
-      console.log('app.globalData.TabCur' + app.globalData.TabCur)
-      switch (app.globalData.TabCur) {
-        case 0:
-          this.getData('/page/selectapply.do')
-          break
-        case 1:
-          this.getData('/page/daiyuyue.do')
-          break
-        case 2:
-          this.getData('/page/smfw.do')
-          break
-        case 3:
-          this.getData('/page/fwwc.do')
-          break
+      if (app.globalData.userRole == 1){
+        switch (app.globalData.TabCur) {
+          case 0:
+            this.getData('/page/selectapply.do')
+            break
+          case 1:
+            this.getData('/page/daiyuyue.do')
+            break
+          case 2:
+            this.getData('/page/smfw.do')
+            break
+          case 3:
+            this.getData('/page/fwwc.do')
+            break
+        }
+      }else{
+        this.GetOrderList()
       }
+      
     },
     
     //picker
@@ -48,20 +56,25 @@ Page({
     // },
     //上拉刷新
     onPullDownRefresh() {
-      switch (this.data.TabCur) {
-        case 0:
-          this.getData('/page/selectapply.do')
-          break
-        case 1:
-          this.getData('/page/daiyuyue.do')
-          break
-        case 2:
-          this.getData('/page/smfw.do')
-          break
-        case 3:
-          this.getData('/page/fwwc.do')
-          break
+      if (app.globalData.userRole == 1){
+        switch (this.data.TabCur) {
+          case 0:
+            this.getData('/page/selectapply.do')
+            break
+          case 1:
+            this.getData('/page/daiyuyue.do')
+            break
+          case 2:
+            this.getData('/page/smfw.do')
+            break
+          case 3:
+            this.getData('/page/fwwc.do')
+            break
+        }
+      }else{
+        this.GetOrderList();
       }
+      
     },
     //查看详情
     Detail: function(e){
@@ -638,7 +651,116 @@ Page({
         console.error("get login failed")
       })
 
-    }
+    },
+
+    // deliver
+    //获取订单
+    GetOrderList() {
+      wx.showLoading({
+        title: '加载中',
+        mask: true,
+      })
+      requestPromisified({
+        url: h.main + "/page/selectapply1.do",
+        data: {
+          id: app.globalData.userId
+        },
+        method: 'Get', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
+        header: {
+          'content-type': 'application/x-www-form-urlencoded',
+          'Accept': 'application/json',
+          'Set-Cookie': 'sessionToken=' + app.globalData.session
+        }, // 设置请求的 header
+      }).then((res) => {
+        switch (res.data.result) {
+          case 1:
+            this.setData({
+              OrderList: res.data.apply
+            })
+            wx.hideLoading()
+            wx.stopPullDownRefresh()
+            break
+          case 0:
+            wx.hideLoading()
+            wx.stopPullDownRefresh()
+            wx.showToast({
+              image: '../../images/attention.png',
+              title: '获取失败!'
+            })
+            break
+          default:
+            wx.hideLoading()
+            wx.stopPullDownRefresh()
+            wx.showToast({
+              image: '../../images/attention.png',
+              title: '服务器繁忙！'
+            });
+        }
+      }).catch((res) => {
+        wx.hideLoading()
+        wx.stopPullDownRefresh()
+        wx.showToast({
+          image: '../../images/attention.png',
+          title: '服务器繁忙！'
+        });
+      })
+    },
+    //确认送货
+    DeliverOver(e) {
+      wx.showModal({
+        title: '提示',
+        content: '确认送货?',
+        success: (res) => {
+          if (res.confirm) {
+            this.SureOver(e.target.dataset.id)
+          } else if (res.cancel) {
+          }
+        }
+      })
+    },
+    SureOver(ID) {
+      wx.showLoading({
+        title: '加载中',
+        mask: true,
+      })
+      requestPromisified({
+        url: h.main + "/page/pswc.do",
+        data: {
+          id: ID
+        },
+        method: 'Get', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
+        header: {
+          'content-type': 'application/x-www-form-urlencoded',
+          'Accept': 'application/json',
+          'Set-Cookie': 'sessionToken=' + app.globalData.session
+        }, // 设置请求的 header
+      }).then((res) => {
+        switch (res.data.result) {
+          case 1:
+            this.GetOrderList()
+            break
+          case 0:
+            wx.hideLoading()
+            wx.showToast({
+              image: '../../images/attention.png',
+              title: '提交失败!'
+            })
+            break
+          default:
+            wx.hideLoading()
+            wx.showToast({
+              image: '../../images/attention.png',
+              title: '服务器繁忙！'
+            });
+        }
+      }).catch((res) => {
+        wx.hideLoading()
+        wx.showToast({
+          image: '../../images/attention.png',
+          title: '服务器繁忙！'
+        });
+      })
+    },
 	
 	
 });
