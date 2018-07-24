@@ -29,7 +29,7 @@
     <button bindtap="loginIn"  class="apply-add" hover-class="hoverClass">登录</button>
 </view>
 
-<button open-type="getUserInfo">授权</button>
+<!-- <button open-type="getUserInfo">授权</button> -->
 
 <!-- <loading hidden="{{loadingHidden}}">
   加载中...

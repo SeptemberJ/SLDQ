@@ -116,6 +116,10 @@ Page({
       });
     })
   },
+  //上拉刷新
+  onPullDownRefresh() {
+    this.GetOrderList();
+  },
   //获取订单
   GetOrderList(){
     wx.showLoading({
@@ -140,9 +144,11 @@ Page({
             OrderList: res.data.apply
           })
           wx.hideLoading()
+          wx.stopPullDownRefresh()
           break
         case 0:
           wx.hideLoading()
+          wx.stopPullDownRefresh()
           wx.showToast({
             image: '../../images/attention.png',
             title: '获取失败!'
@@ -150,6 +156,7 @@ Page({
           break
         default:
           wx.hideLoading()
+          wx.stopPullDownRefresh()
           wx.showToast({
             image: '../../images/attention.png',
             title: '服务器繁忙！'
@@ -157,6 +164,7 @@ Page({
       }
     }).catch((res) => {
       wx.hideLoading()
+      wx.stopPullDownRefresh()
       wx.showToast({
         image: '../../images/attention.png',
         title: '服务器繁忙！'

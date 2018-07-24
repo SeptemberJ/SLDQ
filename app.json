@@ -12,7 +12,7 @@
     "navigationBarTextStyle": "white",
     "navigationBarTitleText": "三联电器",
     "navigationBarBackgroundColor": "#3b5d9d",
-    "backgroundColor": "#7FC9B8",
+    "backgroundColor": "#efefef",
     "enablePullDownRefresh": true
   },
   "debug": true

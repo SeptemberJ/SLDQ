@@ -46,6 +46,23 @@ Page({
     //     index: e.detail.value
     //   })
     // },
+    //上拉刷新
+    onPullDownRefresh() {
+      switch (this.data.TabCur) {
+        case 0:
+          this.getData('/page/selectapply.do')
+          break
+        case 1:
+          this.getData('/page/daiyuyue.do')
+          break
+        case 2:
+          this.getData('/page/smfw.do')
+          break
+        case 3:
+          this.getData('/page/fwwc.do')
+          break
+      }
+    },
     //查看详情
     Detail: function(e){
       wx.showLoading({
@@ -608,11 +625,13 @@ Page({
         console.log(URL+' backinfor----');
         console.log(res.data);
         wx.hideLoading()
+        wx.stopPullDownRefresh()
         this.setData({
           OrderList: res.data,
         })
       }).catch((res) => {
         wx.hideLoading()
+        wx.stopPullDownRefresh()
         wx.showToast({
           title: '服务器繁忙，请稍后重试！'
         });
