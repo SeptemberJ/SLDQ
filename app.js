@@ -51,6 +51,7 @@ App({
     userId:'',
     userInfo: null,
     TabCur:0,
+    _TabCur:0,
     code: "",
     encryptedData: "",
     iv: "",

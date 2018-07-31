@@ -5,31 +5,50 @@ var requestPromisified = util.wxPromisify(wx.request)
 var app = getApp()
 Page( {
   data: {
-    SearchDate:'请选择查询日期',
+    SearchDate_S:'请选择开始日期',
+    SearchDate_E: '请选择结束日期',
     CurrentDate:'',
-    ResultList: null
-    
+    ResultList: null,
+    userRole: null
   },
 
   onLoad: function() {
+    let Now = new Date();
+    let BeforeOneDay = Now.setDate(Now.getDate() - 1)
+    let R = new Date(BeforeOneDay)
     this.setData({
-      //SearchDate: util.formatTimeSimple(new Date()),
-      CurrentDate: util.formatTimeSimple(new Date())
+      CurrentDate: util.formatTimeSimple(R),
+      userRole: app.globalData.userRole
     })
     
   },
-  ChangeSearchDate: function(e){
+  ChangeSearchDateS: function(e){
     this.setData({
-      SearchDate: e.detail.value
+      SearchDate_S: e.detail.value
+    })
+  },
+  ChangeSearchDateE: function (e) {
+    this.setData({
+      SearchDate_E: e.detail.value
     })
   },
   Search: function(){
-    if (this.data.SearchDate == '请选择查询日期'){
+    let start = new Date(this.data.SearchDate_S);
+    let afterMonth = start.setDate(start.getDate() + 31)
+    if (this.data.SearchDate_S == '请选择开始日期' || this.data.SearchDate_E == '请选择结束日期'){
       wx.showToast({
         image: '../../images/attention.png',
         title: '请选择日期！'
       });
-      return false
+      return false;
+    }
+    //周期超出一个月
+    if (afterMonth < (new Date(this.data.SearchDate_E)).getTime()){
+      wx.showToast({
+        image: '../../images/attention.png',
+        title: '周期太长！'
+      });
+      return false;
     }
     wx.showLoading({
       title: '加载中',
@@ -37,7 +56,8 @@ Page( {
     requestPromisified({
       url: h.main + "/page/wanchengdate.do",
       data: {
-        date: this.data.SearchDate,
+        begindate: this.data.SearchDate_S,
+        enddate: this.data.SearchDate_E,
         shifuid: app.globalData.userId
       },
       method: 'POST',

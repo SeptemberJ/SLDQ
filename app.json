@@ -4,7 +4,8 @@
     "pages/Search/index",
     "pages/Deliver/index",
     "pages/OrderList/index",
-    "pages/Submit/index"
+    "pages/Submit/index",
+    "pages/SubmitSM/index"
     
   ],
   "window": {

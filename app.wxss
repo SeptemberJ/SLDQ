@@ -40,6 +40,9 @@ page {
 .colorPurple{
   background: #995A75;
 }
+.colorBlack{
+  color: #000;
+}
 
 .MarginTB_20{
   margin: 20px auto;

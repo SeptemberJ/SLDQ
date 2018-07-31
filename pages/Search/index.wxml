@@ -1,20 +1,79 @@
 <view class='searchDateBar'>
-  <picker mode="date" value="{{SearchDate}}"  end="{{CurrentDate}}" bindchange="ChangeSearchDate">
+  <view class='dateItem'>
+    <text>开始日期</text>
+    <picker mode="date" value="{{SearchDate_S}}"  end="{{CurrentDate}}" bindchange="ChangeSearchDateS">
+    {{SearchDate_S}}
+  </picker>
+  </view>
+  <view class='dateItem'>
+    <text>结束日期</text>
+    <picker mode="date" value="{{SearchDate_E}}"  end="{{CurrentDate}}" bindchange="ChangeSearchDateE">
+    <!-- <picker mode="date" value="{{SearchDate_E}}" bindchange="ChangeSearchDateE"> -->
+    {{SearchDate_E}}
+  </picker>
+  </view>
+  <view class='dateItem'>
+    <view class='searcBox' bindtap='Search'>
+      <text>查询</text>
+      <!-- <image src='../../images/icon/search_active.png'></image> -->
+    </view>
+  </view>
+  <!-- <picker mode="date" value="{{SearchDate}}"  end="{{CurrentDate}}" bindchange="ChangeSearchDate">
     {{SearchDate}}
   </picker>
   <view class='searcBox' bindtap='Search'>
     <text>查询</text>
     <image src='../../images/icon/search_active.png'></image>
-  </view>
+  </view> -->
 </view>
+
+
 <view class='ColumnTit' wx:if='{{ResultList.length>0}}'>
-  <text>订单号</text>
-  <text>总价</text>
+  <text>查询结果列表</text>
 </view>
 <view class='SearchResult'>
   <view class='ResultItem' wx:for="{{ResultList}}" wx:for-item="ResultItem" wx:for-index="ResultIdx">
-    <text>{{ResultItem.FBillNo}}</text>
-    <text>{{ResultItem.pay?'￥' + ResultItem.pay:'--'}}</text>
+    <view class='Sum_info'>
+      <text style="color:#000;">订单号:{{ResultItem.FBillNo}}</text>
+      <text style="color:#000;">总价:{{ResultItem.pay?'￥' + ResultItem.pay:'--'}}</text>
+    </view>
+    <!-- 配送 -->
+    <view class='detail_info' wx:if="{{userRole == 2}}">
+      <text>标准费用</text>
+      <text>{{ResultItem.azcost?ResultItem.azcost:'--'}}</text>
+    </view>
+    <view class='detail_info' wx:if="{{userRole == 2}}">
+      <text>车费</text>
+      <text>{{ResultItem.farecost?ResultItem.farecost:'--'}}</text>
+    </view>
+    <view class='detail_info' wx:if="{{userRole == 2}}">
+      <text>餐费</text>
+      <text>{{ResultItem.mealscost?ResultItem.mealscost:'--'}}</text>
+    </view>
+    <view class='detail_info' wx:if="{{userRole == 2}}">
+      <text>垫付材料费</text>
+      <text>{{ResultItem.materialcosts?ResultItem.materialcosts:'--'}}</text>
+    </view>
+
+    <!-- 安装 -->
+    <view class='detail_info' wx:if="{{userRole == 1}}">
+      <text>标准运费</text>
+      <text>{{ResultItem.pscost?ResultItem.pscost:'--'}}</text>
+    </view>
+    <view class='detail_info' wx:if="{{userRole == 1}}">
+      <text>上楼费</text>
+      <text>{{ResultItem.upstairscost?ResultItem.upstairscost:'--'}}</text>
+    </view>
+    <view class='detail_info' wx:if="{{userRole == 1}}">
+      <text>长途</text>
+      <text>{{ResultItem.distancecost?ResultItem.distancecost:'--'}}</text>
+    </view>
+
+    <view class='detail_info'>
+      <text>其他费用</text>
+      <text>{{ResultItem.othercosts?ResultItem.othercosts:'--'}}</text>
+    </view>
+    
   </view>
 </view>
 

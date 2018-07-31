@@ -18,15 +18,15 @@
       </view>
       <view class='textBlock'>
       <text class='Bold'>地址：</text>
-      <text>{{OrderItem.faddress}}</text>
+      <text>{{OrderItem.faddress?OrderItem.faddress:'--'}}</text>
       </view>
       <view class='textBlock'>
       <text class='Bold'>联系人：</text>
-      <text>{{OrderItem.fpeople}}</text>
+      <text>{{OrderItem.fpeople?OrderItem.fpeople:'--'}}</text>
       </view>
       <view class='textBlock'>
       <text class='Bold'>联系电话：</text>
-      <text>{{OrderItem.ftel}}</text>
+      <text>{{OrderItem.ftel?OrderItem.ftel:'--'}}</text>
       </view>
       <view class='textBlock'>
       <text class='Bold'>特别提醒：</text>
@@ -52,12 +52,12 @@
     </view>
     </view>
   </view>
-  <!--订单详情  -->
+    <!--订单详情  -->
   <view class='Mask' wx:if="{{ifShowModal}}">
   </view>
   <view class='Modal' wx:if="{{ifShowModal}}">
       <text class='Modal_tit'>详细信息</text>
-      <text class='Modal_text'>地址:{{OrderDetail.faddress}}</text>
+      <text class='Modal_text'>地址:{{OrderDetail.faddress?OrderDetail.faddress:'--'}}</text>
       <!-- <text class='Modal_text'>金额：{{OrderDetail.fmoney}}</text> -->
       <view class='Modal_text'>
       <picker wx:if="{{OrderDetail.fbstatus == '3' || OrderDetail.fbstatus == '5' || OrderDetail.fbstatus == '6' || OrderDetail.fbstatus == '7'}}"  mode="date" value="{{modifyDate}}" bindchange="bindDateChange">
@@ -67,80 +67,88 @@
       </picker>
       <text wx:else>要求上门日期: {{OrderDetail.fgodate}} </text>
       </view>
-      <text class='Modal_text'>任务:{{OrderDetail.fcontent?OrderDetail.fcontent:''}}</text>
-      <text class='Modal_text'>业务员:{{OrderDetail.fshifu}}</text>
+      <text class='Modal_text'>交货日期:{{OrderDetail.fdate?OrderDetail.fdate:'--'}}</text>
+      <text class='Modal_text'>安装日期:{{OrderDetail.azfdate?OrderDetail.azfdate:'--'}}</text>
+      <text class='Modal_text'>任务:{{OrderDetail.fcontent?OrderDetail.fcontent:'--'}}</text>
+      <text class='Modal_text'>业务员:{{OrderDetail.fshifu?OrderDetail.fshifu:'--'}}</text>
       <view class='operationBlock'>
         <view class='operation_item lightGreen' bindtap='DetailClose'>关闭</view>
         <view wx:if="{{OrderDetail.fbstatus == '3' || OrderDetail.fbstatus == '5' || OrderDetail.fbstatus == '6' || OrderDetail.fbstatus == '7'}}" class='operation_item borderL lightGreen'  bindtap='ChangeModifyDate'>保存修改</view> 
       </view>
-    </view> 
+  </view> 
+</view>
+
+
+
+<view wx:if='{{userRole == 2}}'>
+  <view class="orderTab_wrap">
+    <view class="orderTab">
+      <text class="{{_TabCur==TabIdx? 'tabItem active':'tabItem'}}" wx:for="{{_Tabs}}" wx:for-item="TabItem" wx:for-index="TabIdx" bindtap='ChangeTabTwo' data-idx='{{TabIdx}}'>{{TabItem}}</text>
+    </view>
+  </view>
+  <view class='blank'></view> 
+  <!-- orderlist -->
+  <view class='orderList_wrap' wx:if="{{OrderList.length>0}}">
+    <view class="orderItem {{OrderItem.psstatus==0?'Green':((OrderItem.psstatus==1)?'Yellow':(OrderItem.psstatus=='2')?'Purple':'Red')}}" wx:for="{{OrderList}}" wx:for-item="OrderItem" wx:for-index="OrderIdx">
+      <view class='order_left' bindtap='Detail' data-id='{{OrderItem.id}}'>
+        <view class='textBlock'>
+        <text class='Bold'>单号：</text>
+        <text>{{OrderItem.forderno}}</text>
+        </view>
+        <view class='textBlock'>
+        <text class='Bold'>地址：</text>
+        <text>{{OrderItem.faddress?OrderItem.faddress:'--'}}</text>
+        </view>
+        <view class='textBlock'>
+        <text class='Bold'>联系人：</text>
+        <text>{{OrderItem.fpeople?OrderItem.fpeople:'--'}}</text>
+        </view>
+        <view class='textBlock'>
+        <text class='Bold'>联系电话：</text>
+        <text>{{OrderItem.ftel?OrderItem.ftel:'--'}}</text>
+        </view>
+        <view class='textBlock'>
+        <text class='Bold'>特别提醒：</text>
+        <text>{{OrderItem.special_note?OrderItem.special_note:'--'}}</text>
+        </view>
+      </view>
+      <view class='order_right'>
+        <button wx:if="{{OrderItem.psstatus != 3}}" type="default" class="button MarginTB_10 {{OrderItem.psstatus == 0?'BtGreen':(OrderItem.psstatus == 1?'BtYellow':(OrderItem.psstatus == 2?'BtPurple':'BtRed'))}}" data-id='{{OrderItem.id}}' data-idx='{{OrderIdx}}'  bindtap='DeliverOver'>{{OrderItem.psstatus == 0?'接单':(OrderItem.psstatus == 1?'提货':(OrderItem.psstatus == 2?'确认完成':''))}} </button>
+        <button wx:if="{{OrderItem.psstatus == 2}}" type="default" class="button MarginTB_10 BtPurple" data-id='{{OrderItem.id}}' data-idx='{{OrderIdx}}'  bindtap='DeliverSubmit'>上传 </button>
+        <button type="default" wx:if="{{OrderItem.psstatus!= 3}}" class="button MarginTB_10 {{OrderItem.psstatus == 0?'BtGreen':(OrderItem.psstatus == 1?'BtYellow':(OrderItem.psstatus == 2?'BtPurple':'BtRed'))}}" data-id='{{OrderItem.id}}' data-idx='{{OrderIdx}}' bindtap='MakeCall'> 打电话 </button>
+      </view>
+    </view>
+  </view>
+    <!--订单详情  -->
+  <view class='Mask' wx:if="{{ifShowModal}}">
+  </view>
+  <view class='Modal' wx:if="{{ifShowModal}}">
+      <text class='Modal_tit'>详细信息</text>
+      <text class='Modal_text'>地址:{{OrderDetail.faddress?OrderDetail.faddress:'--'}}</text>
+      <!-- <text class='Modal_text'>金额：{{OrderDetail.fmoney}}</text> -->
+      <view class='Modal_text'>
+      <picker wx:if="{{OrderDetail.psstatus == '2'}}"  mode="date" value="{{modifyDate}}" bindchange="bindDateChange">
+        <view class="picker">
+          要求上门日期: {{modifyDate}}
+        </view>
+      </picker>
+      <text wx:else>要求上门日期: {{OrderDetail.fgodate}} </text>
+      </view>
+      <text class='Modal_text'>交货日期:{{OrderDetail.fdate?OrderDetail.fdate:'--'}}</text>
+      <text class='Modal_text'>安装日期:{{OrderDetail.azfdate?OrderDetail.azfdate:'--'}}</text>
+      <text class='Modal_text'>任务:{{OrderDetail.fcontent?OrderDetail.fcontent:'--'}}</text>
+      <text class='Modal_text'>业务员:{{OrderDetail.fshifu?OrderDetail.fshifu:'--'}}</text>
+      <view class='operationBlock'>
+        <view class='operation_item lightGreen' bindtap='DetailClose'>关闭</view>
+        <view wx:if="{{OrderDetail.psstatus == '2'}}" class='operation_item borderL lightGreen'  bindtap='ChangeModifyDate'>保存修改</view> 
+      </view>
+  </view> 
+</view>
+
+
   <!--无订单  -->
   <view class="InfoNull" wx:if="{{OrderList.length<=0}}">
       <image src="../../images/box-empty.png" />
       <text>您还没有相关的订单！</text>
   </view>
-</view>
 
-<view wx:if='{{userRole == 2}}'>
-  <view class='orderList_wrap' wx:if="{{OrderList.length>0}}">
-  <view class="orderItem)}}" wx:for="{{OrderList}}" wx:for-item="OrderItem" wx:for-index="OrderIdx">
-  <view class='order_left' bindtap='Detail' data-id='{{OrderItem.id}}'>
-    <view class='textBlock'>
-     <text class='Bold'>单号：</text>
-     <text>{{OrderItem.forderno}}</text>
-    </view>
-    <view class='textBlock'>
-     <text class='Bold'>地址：</text>
-     <text>{{OrderItem.faddress}}</text>
-    </view>
-    <view class='textBlock'>
-     <text class='Bold'>联系人：</text>
-     <text>{{OrderItem.fpeople}}</text>
-    </view>
-    <view class='textBlock'>
-     <text class='Bold'>联系电话：</text>
-     <text>{{OrderItem.ftel}}</text>
-    </view>
-    <view class='textBlock'>
-     <text class='Bold'>特别提醒：</text>
-     <text>{{OrderItem.special_note?OrderItem.special_note:'--'}}</text>
-    </view>
-  </view>
-  <view class='order_right'>
-    <button type="default" class='button' style='background:#3b5d9d' data-id='{{OrderItem.id}}' data-idx='{{OrderIdx}}'  bindtap='DeliverOver'> 确认 </button>
-    </view>
-  </view>
-</view>
-<!--订单详情  -->
-<view class='Mask' wx:if="{{ifShowModal}}">
-</view>
-<view class='Modal' wx:if="{{ifShowModal}}">
-    <text class='Modal_tit'>详细信息</text>
-    <text class='Modal_text'>地址:{{OrderDetail.faddress}}</text>
-    <!-- <text class='Modal_text'>金额：{{OrderDetail.fmoney}}</text> -->
-    <view class='Modal_text'>
-     <!-- <picker wx:if="{{OrderDetail.fbstatus == '3' || OrderDetail.fbstatus == '5' || OrderDetail.fbstatus == '6' || OrderDetail.fbstatus == '7'}}"  mode="date" value="{{modifyDate}}" bindchange="bindDateChange">
-      <view class="picker">
-        要求上门日期: {{modifyDate}}
-      </view>
-    </picker> -->
-     <text>要求上门日期: {{OrderDetail.fgodate}} </text>
-    </view>
-    <text class='Modal_text'>任务:{{OrderDetail.fcontent?OrderDetail.fcontent:''}}</text>
-    <text class='Modal_text'>业务员:{{OrderDetail.fshifu?OrderDetail.fshifu:''}}</text>
-    <view class='operationBlock'>
-      <view class='operation_item lightGreen' bindtap='DetailClose'>关闭</view>
-       <view wx:if="{{OrderDetail.fbstatus == '3' || OrderDetail.fbstatus == '5' || OrderDetail.fbstatus == '6' || OrderDetail.fbstatus == '7'}}" class='operation_item borderL lightGreen'  bindtap='ChangeModifyDate'>保存修改</view> 
-    </view>
-  </view> 
-<!--无订单  -->
-<view class="InfoNull" wx:if="{{OrderList.length<=0}}">
-    <image src="../../images/box-empty.png" />
-    <text>您还没有相关的订单！</text>
-</view>
-
-</view>
-
- <!-- <loading hidden="{{loadingHidden}}">
-  加载中...
-</loading>  -->
